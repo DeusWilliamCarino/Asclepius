@@ -1,0 +1,431 @@
+<html>
+	<head>
+		<meta charset = "utf-8">
+		<title>Asclepius</title> 
+		<link rel="stylesheet" type="text/css" href="https://FishWaterUnder.github.io/Style/asclepiusStyle.css">
+	</head>
+	<body class = "backgroundCheck">
+		<div style="text-align: center;">
+			<div class ="centerTheBlock" style="background-color: darkslategrey; border: 10px solid; border-color: darkslategrey;">
+				<div style="text-align: center;">
+					<h1 class="titleSetting">Enter Credentials</h1>
+				</div>
+				<div style="text-align: center;">
+					<div class ="centerTheBlock">
+						<h4 >First Name</h4>
+						<input type="text" id="Fname_Patient" class="textBoxSet">
+						<h4>Age</h4>
+						<input type="number" id="age_Patient"class="textBoxSet">
+						<h4 >Contact Number</h4>
+						<input type="tel" id="cp_Patient" class="textBoxSet" placeholder="09-2961-24512">
+						<br>
+					</div>
+					<div class ="centerTheBlock">
+						<h4>Last Name</h4>
+						<input type="text" id="Lname_Patient"class="textBoxSet">
+						<h4>Gender</h4>
+						<input type="text" id="gender_Patient"class="textBoxSet">
+						<h4 >Email</h4>
+						<input type="email" id="email_Patient" class="textBoxSet" placeholder="example@domain.com">
+					</div>
+					<br>
+				</div>
+			</div>
+			<div>
+				<h1 class="titleSetting"> Questions</h1>
+			</div>
+			<div style="padding: 11px;" class="centerTheBlock"style="background-color: darkslategrey; border: 10px solid; border-color: darkslategrey;" >
+				<label for="inputField">Purpose of Appointment</label>
+				<select name="inputField" id="inputOption">
+					<option value="nrmlAppointment">Normal Appointment</option>
+					<option value="officeAppointment">For School/Work Documents</option>
+					<option value="legalAppointment">Legal Purpose</option>
+					<option value="VacAppointment">Vaccination</option>
+				</select>
+			</div>
+
+			<div style="text-align: center;" id="nrmlAppt"><!-- Start The Questionaire Section (Normal Apppointment)-->
+				<div class="centerTheBlock" style="background-color: darkslategrey; border: 10px solid; border-color: darkslategrey;">
+					<div style="border: 3px solid; padding:10px;">
+					<h4 style="text-align: center;">Rate Your Pain</h4><br>
+					<h4 style="text-align: center;">0 is no Pain while 10 is extreme pain </h3>
+					<output id="rateResult"></output><br>
+					<input type="range" id="painRate" value="0" min="0" max="10" oninput="rateResult.value=painRate.value">
+					<br><br>
+					</div>
+					<div style="border: 3px solid; padding:10px;">
+					<h4>Location of the Pain</h4>
+					<br>
+					<input type="radio" id="noPain" name="painLoc" value="0">
+					<label for="noPain">No Pain</label>
+					<input type="radio" id="headArea" name="painLoc" value="1">
+					<label for="headArea">Head</label>
+					<input type="radio" id="stomachArea" name="painLoc" value="2">
+					<label for="stomachArea">Stomach</label>
+					<input type="radio" id="backArea" name="painLoc" value="3">
+					<label for="backArea">Back</label>
+					<input type="radio" id="armlegArea" name="painLoc" value="4">
+					<label for="armlegArea">Arms/Legs</label>
+					<input type="radio" id="chestArea" name="painLoc" value="5">
+					<label for="chestArea">Chest</label>
+					</div>
+					<div style="border: 3px solid; padding:10px;">
+					<h4>Fever Intensity</h4>
+					<br>
+					<input type="radio" id="noFev" name="fevInt" value="0">
+					<label for="noFev">No Fever (less than 37.3 C) </label>
+					<input type="radio" id="mildFev" name="fevInt" value="1">
+					<label for="mildFev">Mild (37.3 C to 38.0 C)</label>
+					<input type="radio" id="warmFev" name="fevInt" value="2">
+					<label for="warmFev">Warm (38.1 C to 39.0C)</label>
+					<input type="radio" id="hotFev" name="fevInt" value="3">
+					<label for="hotFev">Hot (above 39.1C)</label>
+					</div>
+					<div style="border: 3px solid; padding:10px;">
+					<h4>Curently Bleeding? If so, specify the level of blood </h4>
+					<br>
+					<input type="radio" id="nCurBleed" name="curBleed" value="0">
+					<label for="nCurBleed">Not Bleeding</label>
+					<input type="radio" id="actCurBleed" name="curBleed" value="3">
+					<label for="actCurBleed">Active</label>
+					<input type="radio" id="mildCurBleed" name="curBleed" value="2">
+					<label for="mildCurBleed">Mild</label>
+					<input type="radio" id="spotCurBleed" name="curBleed" value="1">
+					<label for="spotCurBleed">Spot</label>
+					</div>
+					<div style="border: 3px solid; padding:10px;">
+					<h4>Do you have Diarrhea? if so how many times during the day</h4>
+					<br>
+					<input type="radio" id="no_Diarrhea" name="timeDiarrhea" value="0">
+					<label for="no_Diarrhea">None</label>
+					<input type="radio" id="first_Diarrhea" name="timeDiarrhea" value="1">
+					<label for="first_Diarrhea">1</label>
+					<input type="radio" id="second_Diarrhea" name="timeDiarrhea" value="2">
+					<label for="second_Diarrhea">2</label>
+					<input type="radio" id="third_Diarrhea" name="timeDiarrhea" value="3">
+					<label for="third_Diarrhea">3</label>
+					<input type="radio" id="fourth_Diarrhea" name="timeDiarrhea" value="5">
+					<label for="fourth_Diarrhea">more than 4</label>
+					</div>
+					<div style="border: 3px solid; padding:10px;">
+					<h4>Does the diarrhea have any pain?</h4>
+					<br>
+					<input type="radio" id="yes_PDiarrhea" name="painDiarrhea" value="1">
+					<label for="yes_PDiarrhea">Yes</label>
+					<input type="radio" id="no_PDiarrhea" name="painDiarrhea" value="0">
+					<label for="no_PDiarrhea">No / No Diahhrea</label>
+					</div>
+					<div style="border: 3px solid; padding:10px;">
+					<h4>Consistency of stool</h4>
+					<br>
+					<input type="radio" id="watery_Diarrhea" name="consitencyD" value="2">
+					<label for="watery_Diarrhea">Watery</label>
+					<input type="radio" id="loose_Diarrhea" name="consitencyD" value="1">
+					<label for="loose_Diarrhea">Loose</label>
+					<input type="radio" id="no_CDiarrhea" name="consitencyD" value="0">
+					<label for="no_CDiarrhea">No diarrhea</label>
+					</div>
+					<div style="border: 3px solid; padding:10px;">
+					<h4>Does the Stool have blood? if so what is the level of the blood</h4>
+					<br>
+					<input type="radio" id="no_blood" name="stoolBlood" value="0">
+					<label for="no_blood">No Bloood</label>
+					<input type="radio" id="active_blood" name="stoolBlood" value="3">
+					<label for="active_blood">Active</label>
+					<input type="radio" id="mild_blood" name="stoolBlood" value="2">
+					<label for="mild_blood">Mild</label>
+					<input type="radio" id="spot_blood" name="stoolBlood" value="1">
+					<label for="spot_blood">Spot</label>
+					</div>
+					<div style="border: 3px solid; padding:10px;">
+					<h4>Sneezing/Counghing that interupts daily life?</h4>
+					<br>
+					<input type="radio" id="yInterupt" name="SCDaily" value="1">
+					<label for="yInterupt">Yes</label>
+					<input type="radio" id="nInterupt" name="SCDaily" value="0">
+					<label for="nInterupt">No</label>
+					</div>
+				</div>
+			</div> <!-- End of The Questionaire Section (Normal Appointment) -->
+		</div><br><br>
+		<div style="text-align: center;">
+			<div class="centerTheBlock"style="background-color: darkslategrey; border: 10px solid; border-color: darkslategrey;">
+				<h4 style ="text-align: center;"> Choose Time of Appointment</h4>
+				<p id="dynaDate"></p>
+				<div style="display: flex;">
+					<h4>Picked Time:</h4>
+				</div>
+				<div style ="flex-grow: 1;">
+					<p id="pickedTime"></p>
+				</div>
+				<p id="dateShow"></p><br>
+			</div>
+		</div>
+		<br>
+		<div style="text-align: center;">
+			<button id="insert">Insert</button><br>
+		</div>
+		
+	<script type="module">
+  // Import the functions you need from the SDKs you need
+		import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+		import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+		const firebaseConfig = {
+		 apiKey: "AIzaSyBrsukv1qHoyt07PQk92tQJ0SGP1AFFwAM",
+		 authDomain: "asclepius-c75ef.firebaseapp.com",
+		 projectId: "asclepius-c75ef",
+		 storageBucket: "asclepius-c75ef.appspot.com",
+		 messagingSenderId: "23074186990",
+		 appId: "1:23074186990:web:8c3faf28372fd3d570b5ff",
+		 measurementId: "G-F4CJ76FBR8"
+		};
+
+  // Initialize Firebase
+		const app = initializeApp(firebaseConfig);
+		const analytics = getAnalytics(app);
+		import {getDatabase, set, get, update, remove, ref, child, query, orderByChild, limitToLast, onValue, orderByValue, push} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
+		
+		const db = getDatabase();
+        var enterFName = document.querySelector("#Fname_Patient");
+		var enterLName = document.querySelector("#Lname_Patient");
+        var enterAge = document.querySelector("#age_Patient");
+        var enterGender = document.querySelector("#gender_Patient");
+		var enterEmail = document.querySelector("#email_Patient");
+		var enterPhone = document.querySelector("#cp_Patient");
+
+		var enterTimeCh =document.getElementById("pickedTime");
+
+		/*For testing Purposes, Re add a p with id=tester and button with id=testbutton before insert button
+		var testPar =document.getElementById("tester");
+		var testBttn =document.querySelector("#testButton");
+		testBttn.addEventListener("click",hello);*/
+     
+		var insertBtn = document.querySelector("#insert");
+        var inputChange = document.querySelector("#inputOption");
+		var addDate = document.querySelector("#addtimes");
+		var selOption = document.getElementById("inputOption");
+		var priorityNumber = 0;
+		var dateMonth;
+		var dateYear;
+		var dateDayN;
+
+        function InsertData() {
+			var purpOfVis =selOption.options[selOption.selectedIndex].text;
+			var regExNum= /09-[0-9]{4}-[0-9]{5}/;
+			var regExEmail=  /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+        	var topID;
+			var conditionT = false;
+			var condition1 = setPriorityNumber();
+			var condition2 = seeMissingValues();
+			var condition3 = regExNum.test(enterPhone.value);
+			var condition4 = regExEmail.test(enterEmail.value)
+			var warningER ="Based on the given answers in the questionarie. There are factors that are high. It is adviced to seek imidiate care"
+			var warningMiss="There are mising values. Please fill up the form "
+			if (condition2==false){
+				alert(warningMiss);
+			}else if(condition1 == false){
+				alert(warningER)
+			}else if(condition3==false || condition4 == false){
+				alert("Phone Number or Email is in the Inccorect Pattern.")
+			}else{
+				conditionT = true;
+			}
+			if (conditionT == true){
+				const dbRef =ref(db);
+				const qeery=query(child(dbRef,"Patient"),orderByChild("ID"),limitToLast(1));
+				const qeery2 = ref(db,"Appointments/"+dateYear+"/"+dateMonth+"/"+dateDayN+"/"+enterTimeCh.innerHTML);
+				update(qeery2,{
+					Name: enterFName.value +" "+ enterLName.value
+				})
+				get(qeery).then((snapshot)=>{
+					snapshot.forEach(childSnapshot =>{
+						topID =parseInt(JSON.stringify(childSnapshot.val().ID));
+						topID +=1 ;
+						priorityNumber += (topID/100);
+						set(push(ref(db, "Patient")),{
+							ID: topID,
+							FirstName: enterFName.value,
+							LastName: enterLName.value,
+        					Age: enterAge.value,
+        					Gender: enterGender.value,
+							Purpose:purpOfVis, 
+							TimeSlotted: enterTimeCh.innerHTML, 
+							PriorityValue: priorityNumber,
+							ContactNumber:enterPhone.value,
+							Email: enterEmail.value
+        				})
+						.then(()=>{
+							localStorage.setItem("ReferenceKey",)
+							//window.open("https://firebase.google.com/docs/database/web/read-and-write");//placer lang
+							//window.close();	
+						})
+						.catch((error)=>{
+							alert(error);
+						});
+					})
+				})
+			}
+        }
+
+		function hello(){
+		
+		}
+
+		function seeMissingValues(){
+			selOption = document.querySelector("#inputOption");
+			var compare =selOption.value;
+			var fName =enterFName.value;
+			var lName = enterLName.value;
+			var Age = parseInt(enterAge.value);
+			var Gender = enterGender.value;
+			var cNumber =enterPhone.value;
+			var email = enterEmail.value
+			var timeChose = enterTimeCh.innerHTML;
+			if(fName == ""||lName==""||isNaN(Age)||Gender==""||cNumber==""||email==""||timeChose==""){
+				if (compare.localeCompare("nrmlAppointment") == 0 ){
+					var a = parseInt(getRadioVal("fevInt"));
+					var b = parseInt(getRadioVal("timeDiarrhea"));
+					var c = parseInt(getRadioVal("painLoc"));
+					var d = parseInt(getRadioVal("curBleed"));
+					var e = parseInt(getRadioVal("painDiarrhea"));
+					var f = parseInt(getRadioVal("consitencyD"));
+					var g = parseInt(getRadioVal("stoolBlood"));
+					var h = parseInt(getRadioVal("SCDaily"));
+					if(isNaN(a)||isNaN(b)||isNaN(c)||isNaN(d)||isNaN(e)||isNaN(f)||isNaN(g)||isNaN(h)){
+						return false;
+					}
+				}
+			}
+		}
+
+		function setPriorityNumber(){
+			var selOption = document.querySelector("#inputOption");
+			var compare =selOption.value;
+
+			//For tom: Replace all Radio button Values to numbers by priority
+			if (compare.localeCompare("nrmlAppointment") == 0 ){
+				priorityNumber = 4;
+				var painRate =parseInt(document.getElementById("painRate").value);
+				var constDiarrhea = parseInt(getRadioVal("timeDiarrhea"));
+				var feverLev = parseInt(getRadioVal("fevInt"));
+				priorityNumber += painRate + constDiarrhea + feverLev
+				if (painRate >= 6 || constDiarrhea == 5 || feverLev == 3 ){
+					return false;
+				}else{
+					var painLocation = parseInt(getRadioVal("painLoc"));
+					var bleedStat = parseInt(getRadioVal("curBleed"));
+					var painDiarrh = parseInt(getRadioVal("painDiarrhea"));
+					var consistencyoFD = parseInt(getRadioVal("consitencyD"));
+					var bloodOfS = parseInt(getRadioVal("stoolBlood"));
+					var SneezeCough = parseInt(getRadioVal("SCDaily"));
+					priorityNumber += painLocation + bleedStat + painDiarrh + consistencyoFD + bloodOfS + SneezeCough;
+				}
+			} else if (compare.localeCompare("officeAppointment") == 0){
+				priorityNumber =1;	
+			} else if (compare.localeCompare("legalAppointment") == 0){
+				priorityNumber =2;
+			} else{
+				priorityNumber =3;
+			}
+		}
+		
+		//THIS WOORKSS LETSS GOO
+		function getRadioVal(nameEle){
+			var check = document.getElementsByName(nameEle);
+			for (var i=0;i<check.length; i++){
+				if (check[i].checked){
+					return check[i].value;
+				}
+			}
+		}
+		
+		window.onload=function(){
+			seeAvailableTime()
+		};
+
+		function setSelectedTime(x){
+			enterTimeCh.innerHTML = x;
+		}
+
+		function displayAvailTime(){
+			var dateArray=[];
+			var monthArray=["January","Febuary","March","April","May","June","July","August","September","October","November","December"];
+			const currentDateVan = document.getElementById("curDateAppt").value;
+			dateArray =currentDateVan.split("-");
+			dateMonth = monthArray[dateArray[1]-1];
+			dateYear = dateArray[0];
+			dateDayN = dateArray[2]-0;
+			var displayTimeTable = document.getElementById("dateShow");
+			var availHtml="<br>";
+
+			const dRef =ref(db);
+			let lineCount = 1;
+			for(var hourS=9;hourS<19;hourS++){
+				for(var minuteS=0;minuteS<2;minuteS++){
+					var minutE="00";
+					if (minuteS % 2 !=0){
+						minutE = "30";
+					}
+					let timeValue =hourS+":"+minutE;
+					var qery=query(child(dRef,"Appointments/"+dateYear+"/"+dateMonth+"/"+dateDayN+"/"+timeValue));
+					get(qery).then((snapshot)=>{
+						if(snapshot.val().Name == ""){
+							//Display available time if not available
+							availHtml += "<button value='"+timeValue+"' onclick='setSelectedTime(this.value)'>"+timeValue+"</button>";
+						}
+						lineCount ++;
+						if(lineCount== 5){
+							availHtml+="<br>";
+							lineCount=1;
+						}
+						displayTimeTable.innerHTML= availHtml;
+					})
+				}
+			}
+		}
+
+		function setForm() {
+			var nomralA = document.getElementById("nrmlAppt");
+			var selOption = document.querySelector("#inputOption");
+			var compare =selOption.value;
+			seeAvailableTime();
+			if (compare.localeCompare("nrmlAppointment") == 0 ){
+				nomralA.style.display="block";
+			} else {
+				nomralA.style.display="none";	
+			} 
+		}
+
+		function seeAvailableTime(){
+			var dt =new Date();
+			dt.setDate(dt.getDate()+3);
+			const dtyear = dt.getFullYear();
+			const dtmonth = String(dt.getMonth() + 1).padStart(2,"0");
+			const dtday = String(dt.getDate()).padStart(2,"0");
+			const nowDate = [dtyear, dtmonth, dtday].join('-');
+
+			var dt2 = new Date();
+			dt2.setDate(dt2.getDate() + 20);
+			const dt2year = dt2.getFullYear();
+			const dt2month =String(dt2.getMonth() + 1).padStart(2,'0');
+			const dt2day = String(dt2.getDate()).padStart(2,"0");
+			const nowDate2= [dt2year, dt2month, dt2day].join('-');
+
+			var inTheHTML="<input type='date' min='"+nowDate+"' max='"+nowDate2+"'id='curDateAppt' onchange='displayAvailTime()'>";
+			document.getElementById("dynaDate").innerHTML= inTheHTML;		
+		}
+		
+        insertBtn.addEventListener('click', InsertData);
+		inputChange.addEventListener('change',setForm);
+		window.displayAvailTime = displayAvailTime;
+		window.setSelectedTime =setSelectedTime;
+		
+    </script>
+	
+	</body>
+</html>
