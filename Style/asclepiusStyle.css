@@ -1,6 +1,6 @@
 @font-face      { font-family: Slabo; src: url('Slabo27px-Regular.ttf'); }
 h4,output       {
-              
+                font-family: Slabo;
                 color:white;
                 font-size: 20px;
                 margin-bottom: 0;
