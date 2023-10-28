@@ -1,0 +1,48 @@
+@font-face      { font-family: Slabo; src: url('Slabo27px-Regular.ttf'); }
+h4,output       {
+                font-family: Slabo;
+                color:white;
+                font-size: 20px;
+                margin-bottom: 0;
+                text-align: left;
+                color: lightseagreen
+                }
+
+label           {
+                font-family: Slabo;
+                font-size: 16px;
+                margin-bottom: 0;
+                text-align: left;
+                color: cyan;
+                font-weight: 500;
+                }
+
+.centerTheBlock {
+                text-align: center; 
+                display: inline-block; 
+                }
+
+.backgroundCheck {
+                background-image: linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)), url('https://cdn.discordapp.com/attachments/932124879799586858/1158949909823750234/background.jpg?ex=651e1bb6&is=651cca36&hm=ae1311dd1ebac85633025c0cb147af256135d6598ef95ec992f3e16e0a7d7b7b&');
+                width: 100%;
+                height: 100vh;
+                background-size: cover;
+                background-position: center;
+                }
+
+.titleSetting   {
+                display: inline-block;
+                font-family: Slabo; 
+                border-radius: 10px; 
+                border:5px solid; 
+                border-color: black; 
+                background-color: white; 
+                color: black;
+                }
+
+.textBoxSet     {background-color: darkslategrey; 
+                border-color: lightgray;
+                color: white;
+                font-family: Slabo;
+                font-size: 15;
+                }
