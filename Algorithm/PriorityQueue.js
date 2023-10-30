@@ -1,6 +1,4 @@
-
-
-class PriorityQueue {
+export class PriorityQueue {
     constructor() {
         this.heap = [];
     }
@@ -76,7 +74,7 @@ class PriorityQueue {
  
     heapifyUp() {
         let index = this.heap.length - 1;
-        while (this.hasParent(index) && this.parent(index) > this.heap[index]) {
+        while (this.hasParent(index) && this.parent(index) < this.heap[index]) {
             this.swap(this.getParentIndex(index), index);
             index = this.getParentIndex(index);
         }
@@ -86,10 +84,10 @@ class PriorityQueue {
         let index = 0;
         while (this.hasLeftChild(index)) {
             let smallerChildIndex = this.getLeftChildIndex(index);
-            if (this.hasRightChild(index) && this.rightChild(index) < this.leftChild(index)) {
+            if (this.hasRightChild(index) && this.rightChild(index) > this.leftChild(index)) {
                 smallerChildIndex = this.getRightChildIndex(index);
             }
-            if (this.heap[index] < this.heap[smallerChildIndex]) {
+            if (this.heap[index] > this.heap[smallerChildIndex]) {
                 break;
             } else {
                 this.swap(index, smallerChildIndex);
@@ -98,4 +96,3 @@ class PriorityQueue {
         }
     }
 } 
- 
