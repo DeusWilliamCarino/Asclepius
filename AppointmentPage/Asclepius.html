@@ -2,31 +2,31 @@
 	<head>
 		<meta charset = "utf-8">
 		<title>Asclepius</title> 
-		<link rel="stylesheet" type="text/css" href="https://FishWaterUnder.github.io/Style/asclepiusStyle.css">
+		<link rel="stylesheet" type="text/css" href="asclepiusStyle.css">
 	</head>
 	<body class = "backgroundCheck">
 		<div style="text-align: center;">
-			<div class ="centerTheBlock" style="background-color: darkslategrey; border: 10px solid; border-color: darkslategrey;">
+			<div class ="centerTheBlock">
 				<div style="text-align: center;">
-					<h1 class="titleSetting">Enter Credentials</h1>
+					<h1 class="titleSetting" style="width: -webkit-fill-available;">Enter Credentials</h1>
 				</div>
 				<div style="text-align: center;">
-					<div class ="centerTheBlock">
-						<h4 >First Name</h4>
-						<input type="text" id="Fname_Patient" class="textBoxSet">
-						<h4>Age</h4>
-						<input type="number" id="age_Patient"class="textBoxSet">
-						<h4 >Contact Number</h4>
-						<input type="tel" id="cp_Patient" class="textBoxSet" placeholder="09-2961-24512">
+					<div class ="input-group">
+                        <label class="input-group__label" for="myInput">First Name</label>
+						<input type="text" id="Fname_Patient" class="input-group__input">
+                        <label class="input-group__label" for="myInput">Age</label>
+						<input type="number" id="age_Patient"class="input-group__input">
+                        <label class="input-group__label" for="myInput">Contact Number</label>
+						<input type="tel" id="cp_Patient" class="input-group__input" placeholder="09-2961-24512">
 						<br>
 					</div>
-					<div class ="centerTheBlock">
-						<h4>Last Name</h4>
-						<input type="text" id="Lname_Patient"class="textBoxSet">
-						<h4>Gender</h4>
-						<input type="text" id="gender_Patient"class="textBoxSet">
-						<h4 >Email</h4>
-						<input type="email" id="email_Patient" class="textBoxSet" placeholder="example@domain.com">
+					<div class ="input-group">
+                        <label class="input-group__label" for="myInput">Last Name</label>
+						<input type="text" id="Lname_Patient"class="input-group__input">
+                        <label class="input-group__label" for="myInput">Gender</label>
+						<input type="text" id="gender_Patient"class="input-group__input">
+                        <label class="input-group__label" for="myInput">Email</label>
+						<input type="email" id="email_Patient" class="input-group__input" placeholder="example@domain.com">
 					</div>
 					<br>
 				</div>
@@ -34,136 +34,471 @@
 			<div>
 				<h1 class="titleSetting"> Questions</h1>
 			</div>
-			<div style="padding: 11px;" class="centerTheBlock"style="background-color: darkslategrey; border: 10px solid; border-color: darkslategrey;" >
-				<label for="inputField">Purpose of Appointment</label>
-				<select name="inputField" id="inputOption">
+			<div style="padding: 11px; margin: 10px" class="centerTheBlock">
+				<label for="inputField" class="input-group__label">Purpose of Appointment</label>
+				<select name="inputField" id="inputOption" title="Select a purpose for your appointment">
 					<option value="nrmlAppointment">Normal Appointment</option>
-					<option value="officeAppointment">For School/Work Documents</option>
+					<option value="officeAppointment">School/Work Documents</option>
 					<option value="legalAppointment">Legal Purpose</option>
 					<option value="VacAppointment">Vaccination</option>
 				</select>
 			</div>
 
 			<div style="text-align: center;" id="nrmlAppt"><!-- Start The Questionaire Section (Normal Apppointment)-->
-				<div class="centerTheBlock" style="background-color: darkslategrey; border: 10px solid; border-color: darkslategrey;">
-					<div style="border: 3px solid; padding:10px;">
-					<h4 style="text-align: center;">Rate Your Pain</h4><br>
-					<h4 style="text-align: center;">0 is no Pain while 10 is extreme pain </h3>
-					<output id="rateResult"></output><br>
-					<input type="range" id="painRate" value="0" min="0" max="10" oninput="rateResult.value=painRate.value">
-					<br><br>
+				<div class="centerTheBlock">
+					<div class="divider">
+						<h4 style="text-align: center;">Rate Your Pain</h4>
+						<h4 style="text-align: center;">0 is no Pain while 10 is extreme pain </h3>
+						<output id="rateResult"></output>
+						<input type="range" id="painRate" value="0" min="0" max="10" oninput="rateResult.value=painRate.value" style="margin-top: 10px">
+						
 					</div>
-					<div style="border: 3px solid; padding:10px;">
-					<h4>Location of the Pain</h4>
-					<br>
-					<input type="radio" id="noPain" name="painLoc" value="0">
-					<label for="noPain">No Pain</label>
-					<input type="radio" id="headArea" name="painLoc" value="1">
-					<label for="headArea">Head</label>
-					<input type="radio" id="stomachArea" name="painLoc" value="2">
-					<label for="stomachArea">Stomach</label>
-					<input type="radio" id="backArea" name="painLoc" value="3">
-					<label for="backArea">Back</label>
-					<input type="radio" id="armlegArea" name="painLoc" value="4">
-					<label for="armlegArea">Arms/Legs</label>
-					<input type="radio" id="chestArea" name="painLoc" value="5">
-					<label for="chestArea">Chest</label>
+					<div class="divider">
+						<h4>Location of the Pain</h4>
+					
+						<input type="radio" id="noPain" name="painLoc" value="0" class="check">
+						<label for="noPain">
+							<div class="container">
+								<div class="cRadioBtn">
+									<div class="overlay"></div>
+									<div class="drops xsDrop"></div>
+									<div class="drops mdDrop"></div>
+									<div class="drops lgDrop"></div>
+								</div>
+							</div>
+							<h2>No Pain</h2>
+						</label>
+
+						
+						<input type="radio" id="headArea" name="painLoc" value="1" class="check">
+						<label for="headArea">
+							<div class="container">
+								<div class="cRadioBtn">
+									<div class="overlay"></div>
+									<div class="drops xsDrop"></div>
+									<div class="drops mdDrop"></div>
+									<div class="drops lgDrop"></div>
+								</div>
+							</div>
+							<h2>Head</h2>
+						</label>
+						
+						<input type="radio" id="stomachArea" name="painLoc" value="2" class="check">
+						<label for="stomachArea">
+							<div class="container">
+								<div class="cRadioBtn">
+									<div class="overlay"></div>
+									<div class="drops xsDrop"></div>
+									<div class="drops mdDrop"></div>
+									<div class="drops lgDrop"></div>
+								</div>
+							</div>
+							<h2>Stomach</h2>
+						</label>
+						
+						<input type="radio" id="backArea" name="painLoc" value="3" class="check">
+						<label for="backArea">
+							<div class="container">
+								<div class="cRadioBtn">
+									<div class="overlay"></div>
+									<div class="drops xsDrop"></div>
+									<div class="drops mdDrop"></div>
+									<div class="drops lgDrop"></div>
+								</div>
+							</div>
+							<h2>Back</h2>
+						</label>
+						
+						<input type="radio" id="armlegArea" name="painLoc" value="4" class="check">
+						<label for="armlegArea">
+							<div class="container">
+								<div class="cRadioBtn">
+									<div class="overlay"></div>
+									<div class="drops xsDrop"></div>
+									<div class="drops mdDrop"></div>
+									<div class="drops lgDrop"></div>
+								</div>
+							</div>
+							<h2>Arms/Legs</h2>
+						</label>
+						
+						<input type="radio" id="chestArea" name="painLoc" value="5" class="check">
+						<label for="chestArea">
+							<div class="container">
+								<div class="cRadioBtn">
+									<div class="overlay"></div>
+									<div class="drops xsDrop"></div>
+									<div class="drops mdDrop"></div>
+									<div class="drops lgDrop"></div>
+								</div>
+							</div>
+							<h2>Chest</h2>
+						</label>
+						
 					</div>
-					<div style="border: 3px solid; padding:10px;">
-					<h4>Fever Intensity</h4>
-					<br>
-					<input type="radio" id="noFev" name="fevInt" value="0">
-					<label for="noFev">No Fever (less than 37.3 C) </label>
-					<input type="radio" id="mildFev" name="fevInt" value="1">
-					<label for="mildFev">Mild (37.3 C to 38.0 C)</label>
-					<input type="radio" id="warmFev" name="fevInt" value="2">
-					<label for="warmFev">Warm (38.1 C to 39.0C)</label>
-					<input type="radio" id="hotFev" name="fevInt" value="3">
-					<label for="hotFev">Hot (above 39.1C)</label>
+					<div class="divider">
+						<h4>Fever Intensity</h4>
+						<br>
+						<input type="radio" id="noFev" name="fevInt" value="0" class="check">
+						<label for="noFev">
+							<div class="container">
+								<div class="cRadioBtn">
+									<div class="overlay"></div>
+									<div class="drops xsDrop"></div>
+									<div class="drops mdDrop"></div>
+									<div class="drops lgDrop"></div>
+								</div>
+							</div>
+							<h2>No Fever (less than 37.3 C)</h2>
+						</label>
+						<input type="radio" id="mildFev" name="fevInt" value="1" class="check">
+						<label for="mildFev">
+							<div class="container">
+								<div class="cRadioBtn">
+									<div class="overlay"></div>
+									<div class="drops xsDrop"></div>
+									<div class="drops mdDrop"></div>
+									<div class="drops lgDrop"></div>
+								</div>
+							</div>
+							<h2>Mild (37.3 C to 38.0 C)</h2>
+						</label>
+						<input type="radio" id="warmFev" name="fevInt" value="2" class="check">
+						<label for="warmFev">
+							<div class="container">
+								<div class="cRadioBtn">
+									<div class="overlay"></div>
+									<div class="drops xsDrop"></div>
+									<div class="drops mdDrop"></div>
+									<div class="drops lgDrop"></div>
+								</div>
+							</div>
+							<h2>Warm (38.1 C to 39.0C)</h2>
+						</label>
+						<input type="radio" id="hotFev" name="fevInt" value="3" class="check">
+						<label for="hotFev">
+							<div class="container">
+								<div class="cRadioBtn">
+									<div class="overlay"></div>
+									<div class="drops xsDrop"></div>
+									<div class="drops mdDrop"></div>
+									<div class="drops lgDrop"></div>
+								</div>
+							</div>
+							<h2>Hot (above 39.1C)</h2>
+						</label>
 					</div>
-					<div style="border: 3px solid; padding:10px;">
-					<h4>Curently Bleeding? If so, specify the level of blood </h4>
-					<br>
-					<input type="radio" id="nCurBleed" name="curBleed" value="0">
-					<label for="nCurBleed">Not Bleeding</label>
-					<input type="radio" id="actCurBleed" name="curBleed" value="3">
-					<label for="actCurBleed">Active</label>
-					<input type="radio" id="mildCurBleed" name="curBleed" value="2">
-					<label for="mildCurBleed">Mild</label>
-					<input type="radio" id="spotCurBleed" name="curBleed" value="1">
-					<label for="spotCurBleed">Spot</label>
+					<div class="divider">
+						<h4>Curently Bleeding? If so, specify the level of blood </h4>
+						<br>
+						<input type="radio" id="nCurBleed" name="curBleed" value="0" class="check">
+						<label for="nCurBleed">
+							<div class="container">
+								<div class="cRadioBtn">
+									<div class="overlay"></div>
+									<div class="drops xsDrop"></div>
+									<div class="drops mdDrop"></div>
+									<div class="drops lgDrop"></div>
+								</div>
+							</div>
+							<h2>Not Bleeding</h2>
+						</label>
+						
+						<input type="radio" id="actCurBleed" name="curBleed" value="3" class="check">
+						<label for="actCurBleed">
+							<div class="container">
+								<div class="cRadioBtn">
+									<div class="overlay"></div>
+									<div class="drops xsDrop"></div>
+									<div class="drops mdDrop"></div>
+									<div class="drops lgDrop"></div>
+								</div>
+							</div>
+							<h2>Active</h2>
+						</label>
+						
+						<input type="radio" id="mildCurBleed" name="curBleed" value="2" class="check">
+						<label for="mildCurBleed">
+							<div class="container">
+								<div class="cRadioBtn">
+									<div class="overlay"></div>
+									<div class="drops xsDrop"></div>
+									<div class="drops mdDrop"></div>
+									<div class="drops lgDrop"></div>
+								</div>
+							</div>
+							<h2>Mild</h2>
+						</label>
+						
+						<input type="radio" id="spotCurBleed" name="curBleed" value="1" class="check">
+						<label for="spotCurBleed">
+							<div class="container">
+								<div class="cRadioBtn">
+									<div class="overlay"></div>
+									<div class="drops xsDrop"></div>
+									<div class="drops mdDrop"></div>
+									<div class="drops lgDrop"></div>
+								</div>
+							</div>
+							<h2>Spot</h2>
+						</label>
+						
 					</div>
-					<div style="border: 3px solid; padding:10px;">
-					<h4>Do you have Diarrhea? if so how many times during the day</h4>
-					<br>
-					<input type="radio" id="no_Diarrhea" name="timeDiarrhea" value="0">
-					<label for="no_Diarrhea">None</label>
-					<input type="radio" id="first_Diarrhea" name="timeDiarrhea" value="1">
-					<label for="first_Diarrhea">1</label>
-					<input type="radio" id="second_Diarrhea" name="timeDiarrhea" value="2">
-					<label for="second_Diarrhea">2</label>
-					<input type="radio" id="third_Diarrhea" name="timeDiarrhea" value="3">
-					<label for="third_Diarrhea">3</label>
-					<input type="radio" id="fourth_Diarrhea" name="timeDiarrhea" value="5">
-					<label for="fourth_Diarrhea">more than 4</label>
+
+					<div class="divider">
+						<h4>Do you have Diarrhea? if so how many times during the day</h4>
+						<br>
+						<input type="radio" id="no_Diarrhea" name="timeDiarrhea" value="0" class="check">
+						<label for="no_Diarrhea">
+							<div class="container">
+								<div class="cRadioBtn">
+									<div class="overlay"></div>
+									<div class="drops xsDrop"></div>
+									<div class="drops mdDrop"></div>
+									<div class="drops lgDrop"></div>
+								</div>
+							</div>
+							<h2>None</h2>
+						</label>
+						
+						<input type="radio" id="first_Diarrhea" name="timeDiarrhea" value="1" class="check">
+						<label for="first_Diarrhea">
+							<div class="container">
+								<div class="cRadioBtn">
+									<div class="overlay"></div>
+									<div class="drops xsDrop"></div>
+									<div class="drops mdDrop"></div>
+									<div class="drops lgDrop"></div>
+								</div>
+							</div>
+							<h2>1</h2>
+						</label>
+						
+						<input type="radio" id="second_Diarrhea" name="timeDiarrhea" value="2" class="check">
+						<label for="second_Diarrhea">
+							<div class="container">
+								<div class="cRadioBtn">
+									<div class="overlay"></div>
+									<div class="drops xsDrop"></div>
+									<div class="drops mdDrop"></div>
+									<div class="drops lgDrop"></div>
+								</div>
+							</div>
+							<h2>2</h2>
+						</label>
+						
+						<input type="radio" id="third_Diarrhea" name="timeDiarrhea" value="3" class="check">
+						<label for="third_Diarrhea">
+							<div class="container">
+								<div class="cRadioBtn">
+									<div class="overlay"></div>
+									<div class="drops xsDrop"></div>
+									<div class="drops mdDrop"></div>
+									<div class="drops lgDrop"></div>
+								</div>
+							</div>
+							<h2>3</h2>
+						</label>
+						
+						<input type="radio" id="fourth_Diarrhea" name="timeDiarrhea" value="5" class="check">
+						<label for="fourth_Diarrhea">
+							<div class="container">
+								<div class="cRadioBtn">
+									<div class="overlay"></div>
+									<div class="drops xsDrop"></div>
+									<div class="drops mdDrop"></div>
+									<div class="drops lgDrop"></div>
+								</div>
+							</div>
+							<h2>4</h2>
+						</label>
+						
 					</div>
-					<div style="border: 3px solid; padding:10px;">
-					<h4>Does the diarrhea have any pain?</h4>
-					<br>
-					<input type="radio" id="yes_PDiarrhea" name="painDiarrhea" value="1">
-					<label for="yes_PDiarrhea">Yes</label>
-					<input type="radio" id="no_PDiarrhea" name="painDiarrhea" value="0">
-					<label for="no_PDiarrhea">No / No Diahhrea</label>
+
+					<div class="divider">
+						<h4>Does the diarrhea have any pain?</h4>
+						<br>
+						<input type="radio" id="yes_PDiarrhea" name="painDiarrhea" value="1" class="check">
+						<label for="yes_PDiarrhea">
+							<div class="container">
+								<div class="cRadioBtn">
+									<div class="overlay"></div>
+									<div class="drops xsDrop"></div>
+									<div class="drops mdDrop"></div>
+									<div class="drops lgDrop"></div>
+								</div>
+							</div>
+							<h2>Yes</h2>
+						</label>
+						
+						<input type="radio" id="no_PDiarrhea" name="painDiarrhea" value="0" class="check">
+						<label for="no_PDiarrhea">
+							<div class="container">
+								<div class="cRadioBtn">
+									<div class="overlay"></div>
+									<div class="drops xsDrop"></div>
+									<div class="drops mdDrop"></div>
+									<div class="drops lgDrop"></div>
+								</div>
+							</div>
+							<h2>No / No Diahhrea</h2>
+						</label>
+						
 					</div>
-					<div style="border: 3px solid; padding:10px;">
-					<h4>Consistency of stool</h4>
-					<br>
-					<input type="radio" id="watery_Diarrhea" name="consitencyD" value="2">
-					<label for="watery_Diarrhea">Watery</label>
-					<input type="radio" id="loose_Diarrhea" name="consitencyD" value="1">
-					<label for="loose_Diarrhea">Loose</label>
-					<input type="radio" id="no_CDiarrhea" name="consitencyD" value="0">
-					<label for="no_CDiarrhea">No diarrhea</label>
+
+					<div class="divider">
+						<h4>Consistency of stool</h4>
+						<br>
+						<input type="radio" id="watery_Diarrhea" name="consitencyD" value="2" class="check">
+						<label for="watery_Diarrhea">
+							<div class="container">
+								<div class="cRadioBtn">
+									<div class="overlay"></div>
+									<div class="drops xsDrop"></div>
+									<div class="drops mdDrop"></div>
+									<div class="drops lgDrop"></div>
+								</div>
+							</div>
+							<h2>Watery</h2>
+						</label>
+						
+						<input type="radio" id="loose_Diarrhea" name="consitencyD" value="1" class="check">
+						<label for="loose_Diarrhea">
+							<div class="container">
+								<div class="cRadioBtn">
+									<div class="overlay"></div>
+									<div class="drops xsDrop"></div>
+									<div class="drops mdDrop"></div>
+									<div class="drops lgDrop"></div>
+								</div>
+							</div>
+							<h2>Loose</h2>
+						</label>
+						
+						<input type="radio" id="no_CDiarrhea" name="consitencyD" value="0" class="check">
+						<label for="no_CDiarrhea">
+							<div class="container">
+								<div class="cRadioBtn">
+									<div class="overlay"></div>
+									<div class="drops xsDrop"></div>
+									<div class="drops mdDrop"></div>
+									<div class="drops lgDrop"></div>
+								</div>
+							</div>
+							<h2>No Diahhrea</h2>
+						</label>
+						
 					</div>
-					<div style="border: 3px solid; padding:10px;">
-					<h4>Does the Stool have blood? if so what is the level of the blood</h4>
-					<br>
-					<input type="radio" id="no_blood" name="stoolBlood" value="0">
-					<label for="no_blood">No Bloood</label>
-					<input type="radio" id="active_blood" name="stoolBlood" value="3">
-					<label for="active_blood">Active</label>
-					<input type="radio" id="mild_blood" name="stoolBlood" value="2">
-					<label for="mild_blood">Mild</label>
-					<input type="radio" id="spot_blood" name="stoolBlood" value="1">
-					<label for="spot_blood">Spot</label>
+
+					<div class="divider">
+						<h4>Does the Stool have blood? if so what is the level of the blood</h4>
+						<br>
+						<input type="radio" id="no_blood" name="stoolBlood" value="0" class="check">
+						<label for="no_blood">
+							<div class="container">
+								<div class="cRadioBtn">
+									<div class="overlay"></div>
+									<div class="drops xsDrop"></div>
+									<div class="drops mdDrop"></div>
+									<div class="drops lgDrop"></div>
+								</div>
+							</div>
+							<h2>No Blood</h2>
+						</label>
+						
+						<input type="radio" id="active_blood" name="stoolBlood" value="3" class="check">
+						<label for="active_blood">
+							<div class="container">
+								<div class="cRadioBtn">
+									<div class="overlay"></div>
+									<div class="drops xsDrop"></div>
+									<div class="drops mdDrop"></div>
+									<div class="drops lgDrop"></div>
+								</div>
+							</div>
+							<h2>Active</h2>
+						</label>
+						
+						<input type="radio" id="mild_blood" name="stoolBlood" value="2" class="check">
+						<label for="mild_blood">
+							<div class="container">
+								<div class="cRadioBtn">
+									<div class="overlay"></div>
+									<div class="drops xsDrop"></div>
+									<div class="drops mdDrop"></div>
+									<div class="drops lgDrop"></div>
+								</div>
+							</div>
+							<h2>Mild</h2>
+						</label>
+						
+						<input type="radio" id="spot_blood" name="stoolBlood" value="1" class="check">
+						<label for="spot_blood">
+							<div class="container">
+								<div class="cRadioBtn">
+									<div class="overlay"></div>
+									<div class="drops xsDrop"></div>
+									<div class="drops mdDrop"></div>
+									<div class="drops lgDrop"></div>
+								</div>
+							</div>
+							<h2>Spot</h2>
+						</label>
+						
 					</div>
-					<div style="border: 3px solid; padding:10px;">
-					<h4>Sneezing/Counghing that interupts daily life?</h4>
-					<br>
-					<input type="radio" id="yInterupt" name="SCDaily" value="1">
-					<label for="yInterupt">Yes</label>
-					<input type="radio" id="nInterupt" name="SCDaily" value="0">
-					<label for="nInterupt">No</label>
+
+					<div class="divider">
+						<h4>Sneezing/Counghing that interupts daily life?</h4>
+						<br>
+						<input type="radio" id="yInterupt" name="SCDaily" value="1" class="check">
+						<label for="yInterupt">
+							<div class="container">
+								<div class="cRadioBtn">
+									<div class="overlay"></div>
+									<div class="drops xsDrop"></div>
+									<div class="drops mdDrop"></div>
+									<div class="drops lgDrop"></div>
+								</div>
+							</div>
+							<h2>Yes</h2>
+						</label>
+						
+						<input type="radio" id="nInterupt" name="SCDaily" value="0" class="check">
+						<label for="nInterupt">
+							<div class="container">
+								<div class="cRadioBtn">
+									<div class="overlay"></div>
+									<div class="drops xsDrop"></div>
+									<div class="drops mdDrop"></div>
+									<div class="drops lgDrop"></div>
+								</div>
+							</div>
+							<h2>No</h2>
+						</label>
+						
 					</div>
 				</div>
 			</div> <!-- End of The Questionaire Section (Normal Appointment) -->
 		</div><br><br>
 		<div style="text-align: center;">
-			<div class="centerTheBlock"style="background-color: darkslategrey; border: 10px solid; border-color: darkslategrey;">
+			<div class="centerTheBlock">
 				<h4 style ="text-align: center;"> Choose Time of Appointment</h4>
 				<p id="dynaDate"></p>
 				<div style="display: flex;">
 					<h4>Picked Time:</h4>
+					
 				</div>
 				<div style ="flex-grow: 1;">
-					<p id="pickedTime"></p>
+					<p id="pickedTime" class="input-group" style="color: rgb(138 245 237);
+					font-weight: bold;"></p>
+					
 				</div>
 				<p id="dateShow"></p><br>
 			</div>
 		</div>
 		<br>
-		<div style="text-align: center;">
-			<button id="insert">Insert</button><br>
+		<div class="buttons">
+			<button id="insert"><span></span>Insert</button>
 		</div>
 		
 	<script type="module">
@@ -247,22 +582,34 @@
 						topID =parseInt(JSON.stringify(childSnapshot.val().ID));
 						topID +=1 ;
 						priorityNumber += (topID/100);
-						set(push(ref(db, "Patient")),{
+						var pushedKey = push(ref(db, "Patient"));
+						set(pushedKey,{
 							ID: topID,
 							FirstName: enterFName.value,
 							LastName: enterLName.value,
         					Age: enterAge.value,
         					Gender: enterGender.value,
 							Purpose:purpOfVis, 
-							TimeSlotted: enterTimeCh.innerHTML, 
+							TimeSlotted: enterTimeCh.innerHTML,
+							Day: dateDayN,
+							Month:dateMonth,
+							Year: dateYear, 
 							PriorityValue: priorityNumber,
 							ContactNumber:enterPhone.value,
 							Email: enterEmail.value
         				})
-						.then(()=>{
-							localStorage.setItem("ReferenceKey",)
-							//window.open("https://firebase.google.com/docs/database/web/read-and-write");//placer lang
-							//window.close();	
+						.then((snapshot)=>{
+							
+							localStorage.setItem("RefKey", pushedKey.key);
+							localStorage.setItem("DateMonth", dateMonth);
+							localStorage.setItem("DateDay", dateDayN);
+							localStorage.setItem("DateYear",dateYear);
+							localStorage.setItem("Time",enterTimeCh.innerHTML);
+							localStorage.setItem("Fname",enterFName.value);
+							localStorage.setItem("Lname",enterLName.value);
+							localStorage.setItem("Purpose",purpOfVis);
+							window.open("confirmAppointment.html");//placer lang
+							window.close();	
 						})
 						.catch((error)=>{
 							alert(error);
@@ -271,10 +618,6 @@
 				})
 			}
         }
-
-		function hello(){
-		
-		}
 
 		function seeMissingValues(){
 			selOption = document.querySelector("#inputOption");
@@ -376,10 +719,10 @@
 					get(qery).then((snapshot)=>{
 						if(snapshot.val().Name == ""){
 							//Display available time if not available
-							availHtml += "<button value='"+timeValue+"' onclick='setSelectedTime(this.value)'>"+timeValue+"</button>";
+							availHtml += "<button value='"+timeValue+"' onclick='setSelectedTime(this.value)'><span></span>"+timeValue+"</button>";
 						}
 						lineCount ++;
-						if(lineCount== 5){
+						if(lineCount== 6){
 							availHtml+="<br>";
 							lineCount=1;
 						}
