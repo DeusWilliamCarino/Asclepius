@@ -1,25 +1,41 @@
 @font-face      { font-family: Slabo; src: url('Slabo27px-Regular.ttf'); }
+
+*{
+    font-family: Slabo; 
+}
 h4,output       {
                 font-family: Slabo;
                 color:white;
                 font-size: 20px;
                 margin-bottom: 0;
                 text-align: left;
-                color: lightseagreen
+                color: lightseagreen;
+                text-align: center;
                 }
 
 label           {
                 font-family: Slabo;
-                font-size: 16px;
+                font-size: 20px;
                 margin-bottom: 0;
                 text-align: left;
-                color: cyan;
+                color: #1cc3c3;
                 font-weight: 500;
+                align-items : center
                 }
 
 .centerTheBlock {
                 text-align: center; 
                 display: inline-block; 
+                background-color: #82a1a13b;
+                border: 2px solid; 
+                border-color: darkslategrey;
+                background-image: linear-gradient(#0000, #0000008c), 
+                    linear-gradient(120deg, rgb(50 162 153 / 9%) 0%, #43555500 50%, #00ff5e00 100%);
+                background-origin: border-box;
+                background-clip: padding-box, border-box;
+                border-radius: 20px;
+                padding: 10px;
+
                 }
 
 .backgroundCheck {
@@ -35,14 +51,281 @@ label           {
                 font-family: Slabo; 
                 border-radius: 10px; 
                 border:5px solid; 
-                border-color: black; 
-                background-color: white; 
-                color: black;
+                border-color: transparent;
+                background-color: #00000066;
+                color: #1cc3c3;
+                border-radius: 20px;
+                padding: 8px;
                 }
 
-.textBoxSet     {background-color: darkslategrey; 
-                border-color: lightgray;
-                color: white;
-                font-family: Slabo;
-                font-size: 15;
+
+.input-group    {
+                    width: 100%;
+                    max-width: 20em;
+                    display: flex;
+                    flex-direction: column;
+                    z-index: 2;
+                    align-content: center;
+                    display: inline-block;
+                    text-align: center;
+                    
+                    
+                  
+                    @supports (mix-blend-mode: darken) {
+                      position: relative;
+                      mix-blend-mode: lighten;
+                    }
+                  
+                    .input-group__label {
+                      padding: 0 0.5em;
+                      margin-bottom: 0.5em;
+                      text-transform: uppercase;
+                      font-size: 0.975em;
+                      letter-spacing: 0.1em;
+                      color: #ccd;
+                      color: rgb(138 245 237);
+                      cursor: pointer;
+                    }
+                  
+                    .input-group__input {
+                      color: #fff;
+                      font-size: 1rem;
+                      line-height: 1;
+                      border-style: none;
+                      outline: none;
+                      height: calc(1em + 1.6em + 0.5em);
+                      width: 100%;
+                      padding: 0.8em 1em;
+                      border: 2px solid transparent;
+                      background-image: linear-gradient(#000, #000),
+                      linear-gradient(120deg, rgb(50, 162, 153) 0%, #435555 50%, #00ff5e 100%);
+                      background-origin: border-box;
+                      background-clip: padding-box, border-box;
+                      border-radius: 1.8em;
+                      background-size: 200% 100%;
+                      transition: background-position 0.8s ease-out;
+                      text-align: center; /* Center the text horizontally */
+                  
+                      &:hover {
+                        background-position: 100% 0;
+                      }
+                  
+                      &:focus {
+                        outline: 2px dashed rgb(50, 162, 153);
+                        outline-offset: 0.5em;
+                        transition: background-position 0.8s ease-out;
+                      }
+                    }
                 }
+.divider{
+    border-bottom: 2px solid;
+    border-color: gray;
+    padding: 5px;
+}
+       
+:root {
+    --primary: #32a299;
+    --secondary: #fffff;
+    --border-color: #d4d7eb;
+  }
+  
+  
+  
+  input[type="radio"] {
+    display : none
+  }
+  
+  label {
+    display : flex;
+    padding :15px;
+    gap :2em;
+    align-items : center
+  }
+  
+  .container {
+    width :50px;
+    aspect-ratio : 1;
+    overflow : hidden;
+    border-radius : 50%;
+    box-shadow : 2px 5px 5px rgba(0,0,0,0.2);
+  }
+  
+  .cRadioBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: #fff;
+    position: relative;
+    border: solid 5px var(--border-color);
+    box-sizing: border-box;
+    transition: all 0.1s ease-in;
+    cursor: pointer;
+    
+  }
+  
+  .cRadioBtn:hover {
+    border: solid 10px var(--primary);
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--secondary);
+  }
+  
+  .check:checked + label > .container > .cRadioBtn > .overlay {
+    background: #fff;
+    animation: shrink 0.3s ease-in-out forwards;
+  }
+  
+  .check:checked + label > .container  > .cRadioBtn {
+    background: var(--primary);
+    border-color: var(--primary);
+  }
+  
+  .drops {
+    position: absolute;
+    background: #fff;
+    top: -100%;
+    left: 50%;
+    transform: translate(-50%);
+    border-radius: 50%;
+    aspect-ratio: 1;
+  }
+  
+  .lgDrop {
+    width: 50%;
+  }
+  
+  .xsDrop {
+    width: 20%;
+  }
+  
+  .mdDrop {
+    width: 30%;
+  }
+  
+  .check:checked + label > .container  > .cRadioBtn > .lgDrop {
+    animation: drop 0.5s ease-in-out forwards;
+  }
+  
+  .check:checked + label > .container  > .cRadioBtn > .mdDrop {
+    animation: drop 0.8s ease-in forwards;
+  }
+  
+  .check:checked + label > .container  > .cRadioBtn > .xsDrop {
+    animation: drop 0.9s linear forwards;
+  }
+  
+  @keyframes drop {
+    0% {
+      top: -100%;
+    }
+    50% {
+      top: -100%;
+    }
+    75% {
+      top: 10%;
+    }
+    100% {
+      top: 25%;
+    }
+  }
+  
+  @keyframes shrink {
+    0% {
+      width: 100%;
+    }
+    100% {
+      width: 0px;
+    }
+  }
+
+  h2{
+    text-align: center;
+    font-size: 1.25rem;
+  }
+
+  .buttons {
+    margin-top: 20px;
+    text-align: center;
+}
+
+button{
+    width: 200px;
+    padding: 15px 0;
+    text-align: center;
+    margin: 20px 10px;
+    border-radius: 25px;
+    font-weight: bold;
+    border: 2px solid rgb(53, 146, 138);
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    
+}
+span{
+    background: rgb(50, 162, 153);
+    height: 100%;
+    width: 0;
+    border-radius: 25px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+    transition: 0.67s;
+}
+button:hover span{
+    width: 100%;
+}
+button:hover{
+    border: none;
+}
+
+#inputOption {
+  font-family: 'Slabo', sans-serif; /* Add your desired font family */
+  font-size: 16px; /* Adjust the font size as needed */
+  color: rgb(50, 162, 153); /* Set the text color */
+  background-image: linear-gradient(#0000, #0000008c),
+      linear-gradient(120deg, #435555 50%, rgb(50, 162, 153) 0%, #00ff5e 100%);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  border: 2px solid transparent;
+  border-radius: 1.8em;
+  background-size: 200% 100%;
+  transition: background-position 0.8s ease-out;
+}
+
+#inputOption,
+input[type="date"]  {
+  font-family: 'Slabo', sans-serif;
+  font-size: 16px;
+  color: rgb(50, 162, 153);
+  background-image: linear-gradient(#0000, #0000008c),
+    linear-gradient(120deg, #435555 50%, rgb(50, 162, 153) 0%, #00ff5e 100%);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  border: 2px solid transparent;
+  border-radius: 1.8em;
+  background-size: 200% 100%;
+  transition: background-position 0.8s ease-out;
+  
+}
+
+
+
+
+
+
+
+
