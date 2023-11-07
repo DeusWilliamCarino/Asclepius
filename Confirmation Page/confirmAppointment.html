@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <meta charset = "utf-8">
+		<title>Find Information</title> 
+		<link rel="stylesheet" type="text/css" href="asclepiusStyle.css">
+    </head>
+    <body class="backgroundCheck">
+        <div style="text-align: center;">
+            <div class="centerTheBlock">
+                <div class ="input-group">
+                    <div style="text-align: center;">
+                        <h4 id="refkeyPlacehold">Reference Key: </h4>
+                    </div>
+                    <h4>Keep this and use it for checking your appointment date again </h4>
+                    <div style="text-align: center;">
+                        <h4 >Appointment Information: </h4>
+                        <p id="hereInfo" class="centerTheBlock" style="color: rgb(50, 162, 153);"></p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <script type="text/javascript">
+            function displayResult(){
+                var infoDump = document.getElementById("hereInfo");
+                var setHTML="<br>";
+                document.getElementById("refkeyPlacehold").innerHTML += localStorage.getItem("RefKey");
+                var dMonth = localStorage.getItem("DateMonth");
+				var dDay = localStorage.getItem("DateDay");
+				var dYear = localStorage.getItem("DateYear");
+				var timeGet = localStorage.getItem("Time");
+				var fName = localStorage.getItem("Fname");
+				var lName = localStorage.getItem("Lname");
+				var purpVis = localStorage.getItem("Purpose");
+
+                setHTML += "<p>Name: "+fName+" "+lName+"</p>";
+                setHTML += "<p>Appoinment Date: "+dMonth+" "+dDay+", "+dYear+"</p>";
+                setHTML += "<p>Appointment Time: "+timeGet+"</p>";
+                setHTML += "<p>Purpose of Visit: "+purpVis+"</p>";
+                infoDump.innerHTML += setHTML;
+
+                localStorage.removeItem("RefKey");
+				localStorage.removeItem("DateMonth");
+				localStorage.removeItem("DateDay");
+				localStorage.removeItem("DateYear");
+				localStorage.removeItem("Time");
+				localStorage.removeItem("Fname");
+				localStorage.removeItem("Lname");
+				localStorage.removeItem("Purpose");
+                
+            }
+            window.onload=function(){
+                displayResult();
+            }
+        </script>
+    </body>
+</html>
