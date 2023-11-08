@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NursePage</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="banner">
+        <div class="navbar">
+            <!-- <img src="../images/logo.PNG" alt="logo" class="logo"> -->
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+        </div>
+        <div class="box">
+            <img src="logo.PNG" alt="Logo" class="logo">
+            <div style="text-align: center;">
+                <h4>Inside doctor's Room:</h4>
+                <h4 id="insD"></h4>
+            </div>
+            <div class="centerTheBlock">
+                <div class="float-child" style="border-radius: 20px; margin: 10px; padding: 10px; font-size: 18px; box-shadow: 0 0 10px rgba(0,0,0,.9); backdrop-filter: blur(25px);">
+                    <h4 id="tdyAppoint"></h4>
+                    <!--<button id="test">hi</button>-->
+                </div>
+                <div class="float-child-right" style="border-radius: 20px; margin: 10px; padding: 10px; font-size: 18px; box-shadow: 0 0 10px rgba(0,0,0,.9); backdrop-filter: blur(25px);">
+                    <h4 id="prioqueue" ></h4>
+                    <h4 id ="Change Date"></h4>
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <h4 id="nameOfP"></h4>
+                <h4 id="titleofChange" style="display: none;">Change the Appointment of current patient</h4>
+                <p id="dynaDate"></p>
+                <p id="timeChosen"></p>
+                <p id="dispTime"></p><br><br><br>
+                    <button id="doAgain" type="button" class="button"><span></span>Refresh</h4>
+                    <button id="endDay" ><span></span>End of the day</h4>
+            </div>
+        </div>
+    </div>
+    <script type="Module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+		import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js";
+        import { PriorityQueue } from "https://FishWaterUnder.github.io/Algorithm/PriorityQueue.js"
+
+        var prioQue = new PriorityQueue();
+        var numofPeople =0;
+        var dispTdY = document.getElementById("tdyAppoint");
+        var aboveQue = document.getElementById("prioqueue");
+        var docRoom = document.getElementById("insD");
+        var endDay =document.querySelector("#endDay");
+        var refButton =document.querySelector("#doAgain");
+
+        var globKeyVal;
+        var globFName;
+        var globLName;
+        var dateYear;
+        var dateMonth;
+        var dateDayN;
+
+		const firebaseConfig = {
+		 apiKey: "AIzaSyBrsukv1qHoyt07PQk92tQJ0SGP1AFFwAM",
+		 authDomain: "asclepius-c75ef.firebaseapp.com",
+		 projectId: "asclepius-c75ef",
+		 storageBucket: "asclepius-c75ef.appspot.com",
+		 messagingSenderId: "23074186990",
+		 appId: "1:23074186990:web:8c3faf28372fd3d570b5ff",
+		 measurementId: "G-F4CJ76FBR8"
+		};
+
+		const app = initializeApp(firebaseConfig);
+		const analytics = getAnalytics(app);
+		import {getDatabase, set, get, update, remove, ref, child, query, orderByChild, limitToLast, onValue, orderByValue, push, equalTo} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
+		
+		const db = getDatabase();
+
+        function seePriority() {
+            const dRef =ref(db);
+            getPriority().then(function(){
+                var prioHtml="<h4>Priority Queue</h4><br>";
+                for (var i=0;i<numofPeople;i++){
+                    var qery2 = query(child(dRef,"Patient"),orderByChild("PriorityValue"),equalTo(prioQue.peek()));
+                    get(qery2).then((snapshot)=>{
+                        snapshot.forEach(childSnapshot=>{
+                        prioHtml += "<div style='border-top: 1px solid gray; margin: 10px; padding: 10px;'>"+
+                        "<h4>Name: "+childSnapshot.val().FirstName+" "+childSnapshot.val().LastName+"</h4>"+
+                        "<h4>Gender: "+childSnapshot.val().Gender+"</h4>"+
+                        "<h4>Purpose of Visit: "+childSnapshot.val().Purpose+"</h4>"+
+                        "<h4>Contact Number: "+childSnapshot.val().ContactNumber+"</h4>"+
+                        "<h4>Email: "+childSnapshot.val().Email+"</h4>"+
+                        "<button value='"+childSnapshot.key+"'onclick='setChangeAptDetail(this.value)'><span></span>Change Appointment</button></div>";
+                        aboveQue.innerHTML = prioHtml;
+                        })
+                    })
+                    prioQue.remove();
+                }
+            })
+        }
+        function setChangeAptDetail(keyValue){
+            seeAvailableTime();
+            document.getElementById("titleofChange").style.display="block";
+            const dbref = ref(db);
+            get(child(dbref,"Patient/"+keyValue))
+            .then((snapshot)=>{
+                document.getElementById("nameOfP").innerHTML=snapshot.val().FirstName+" "+snapshot.val().LastName;
+                globFName = snapshot.val().FirstName;
+                globLName = snapshot.val().LastName;
+            })
+            globKeyVal = keyValue;
+
+        }
+
+        function changeTime(){
+            var time = document.getElementById("timeChosen").innerHTML;
+            const dbRef =ref(db);
+            console.log(dateYear);
+            console.log(dateMonth);
+            console.log(dateDayN);
+            console.log(time);
+            console.log(globKeyVal);
+			const qeery = ref(db,"Appointments/"+dateYear+"/"+dateMonth+"/"+dateDayN+"/"+time);
+			update(qeery,{
+				Name: globFName +" "+ globLName
+			})
+            get(child(dbRef,"Patient/"+globKeyVal))
+            .then((snapshot)=>{
+                var year = snapshot.val().Year;
+                var month= snapshot.val().Month;
+                var dayN = snapshot.val().Day;
+                var slotted = snapshot.val().TimeSlotted;
+                var qeery2 = ref(db,"Appointments/"+year+"/"+month+"/"+dayN+"/"+slotted)
+                update(qeery2,{
+                    Name : ""
+                })
+            })
+            update(ref(db,"Patient/"+globKeyVal),{
+                Year: dateYear,
+                Month: dateMonth,
+                Day: dateDayN,
+                TimeSlotted: time
+            })
+        }
+
+        function setSelectedTime(x){
+			document.getElementById("timeChosen").innerHTML = x;
+		}
+
+        function displayAvailTime(){
+			var dateArray=[];
+			var monthArray=["January","Febuary","March","April","May","June","July","August","September","October","November","December"];
+			const currentDateVan = document.getElementById("curDateAppt").value;
+			var dateArray =currentDateVan.split("-");
+			dateMonth = monthArray[dateArray[1]-1];
+			dateYear = dateArray[0];
+			dateDayN = dateArray[2]-0;
+			var displayTimeTable = document.getElementById("dispTime");
+			var availHtml="<br>";
+
+			const dRef =ref(db);
+			let lineCount = 1;
+			for(var hourS=9;hourS<19;hourS++){
+				for(var minuteS=0;minuteS<2;minuteS++){
+					var minutE="00";
+					if (minuteS % 2 !=0){
+						minutE = "30";
+					}
+					let timeValue =hourS+":"+minutE;
+					var qery=query(child(dRef,"Appointments/"+dateYear+"/"+dateMonth+"/"+dateDayN+"/"+timeValue));
+					get(qery).then((snapshot)=>{
+						if(snapshot.val().Name == ""){
+							//Display available time if not available
+							availHtml += "<button value='"+timeValue+"' onclick='setSelectedTime(this.value)'>"+timeValue+"</button>";
+						}
+						lineCount ++;
+						if(lineCount== 6){
+							availHtml+="<br>";
+							lineCount=1;
+						}
+						displayTimeTable.innerHTML= availHtml;
+					})
+				}
+			}
+		}
+        function seeAvailableTime(){
+			var dt =new Date();
+			dt.setDate(dt.getDate());
+			const dtyear = dt.getFullYear();
+			const dtmonth = String(dt.getMonth() + 1).padStart(2,"0");
+			const dtday = String(dt.getDate()).padStart(2,"0");
+			const nowDate = [dtyear, dtmonth, dtday].join('-');
+
+			var dt2 = new Date();
+			dt2.setDate(dt2.getDate() +3);
+			const dt2year = dt2.getFullYear();
+			const dt2month =String(dt2.getMonth() + 1).padStart(2,'0');
+			const dt2day = String(dt2.getDate()).padStart(2,"0");
+			const nowDate2= [dt2year, dt2month, dt2day].join('-');
+
+			var inTheHTML="<input type='date' min='"+nowDate+"' max='"+nowDate2+"'id='curDateAppt'onchange='displayAvailTime()'><br>";
+            inTheHTML += "<br><button onclick='changeTime()'>Change</button>"
+			document.getElementById("dynaDate").innerHTML= inTheHTML;		
+		}
+
+        function getPriority() {
+            numofPeople =0;
+            return new Promise(function(resolve,reject){
+            const dbRef =ref(db);
+            const qeery=query(child(dbRef,"Patient"),orderByChild("PriorityValue"));
+            get(qeery).then((snapshot)=>{
+            snapshot.forEach(childSnapshot =>{
+                var placer = parseFloat(JSON.stringify(childSnapshot.val().PriorityValue))
+                if(!isNaN(placer)){
+                    prioQue.add(parseFloat(JSON.stringify(childSnapshot.val().PriorityValue)));
+                    numofPeople++;
+                } 
+                return resolve();
+            })
+            })
+        })
+        }
+
+        function seeTodayAppointment() {
+            var dt = new Date("11/14/2023");//For test use November 10
+            const dtyear = dt.getFullYear();
+			//var dtmonth = (dt.getMonth() + 1)
+            var dtmonth = dt.toLocaleString('default',{month:'long'});
+			const dtday = dt.getDate();
+
+            var availHtml="<h4>Today's Appointment</h4><br>";
+
+			const dRef =ref(db);
+			for(var hourS=9;hourS<19;hourS++){
+				for(var minuteS=0;minuteS<2;minuteS++){
+					var minutE="00";
+					if (minuteS % 2 !=0){
+						minutE = "30";
+					}
+					let timeValue =hourS+":"+minutE;
+					var qery=query(child(dRef,"Appointments/"+dtyear+"/"+dtmonth+"/"+dtday+"/"+timeValue));
+					get(qery).then((snapshot)=>{
+						if(snapshot.val().Name != ""){
+                            var fullName = snapshot.val().Name;
+                            var arrayName = fullName.split(" ");
+                            var fName;
+                            if(arrayName.length >2){
+                                fName= arrayName[0]+ " "+ arrayName[1];
+                            }else{
+                                fName = arrayName[0];
+                            }
+                            if (arrayName[arrayName.length-1] != "(Done)"||arrayName[arrayName.length-1] != "Show)"){
+                                var qery2 = query(child(dRef,"Patient"),orderByChild("FirstName"),equalTo(fName));
+                                get(qery2).then((snapshot)=>{
+                                    snapshot.forEach(childSnapshot=>{
+                                        availHtml += "<div style='border-top: 1px solid gray; margin: 10px; padding: 10px;'><h4>Time :"+childSnapshot.val().TimeSlotted+"</h4>"+
+                                        "<h4>Name: "+childSnapshot.val().FirstName+" "+childSnapshot.val().LastName+"</h4>"+
+                                        "<h4>Gender: "+childSnapshot.val().Gender+"</h4>"+
+                                        "<h4>Purpose of Visit: "+childSnapshot.val().Purpose+"</h4>"+
+                                        "<h4>Contact Number: "+childSnapshot.val().ContactNumber+"</h4>"+
+                                        "<h4>Email: "+childSnapshot.val().Email+"</h4>"+
+                                        "<button value='"+childSnapshot.key+"' onclick='deleteAppoint(this.value)'>No Show</button>"+
+                                        "<button  value='"+childSnapshot.key+"' onclick='toDoctor(this.value)'>Into Doctor Office</button></div>";
+                                        dispTdY.innerHTML = availHtml;
+                                    })
+                                })
+                            }
+						}
+					})
+				}
+			}
+        }
+        function toDoctor(keyValue) {
+            const dbref = ref(db);
+            get(child(dbref,"Patient/"+keyValue))
+            .then((snapshot)=>{
+                docRoom.innerHTML = "<h4>Name: "+snapshot.val().FirstName+"</h4>"
+                set(ref(db,"InDocOffice/Doctor1"),{
+                    ReferenceKey: snapshot.key,
+                    FirstName: snapshot.val().FirstName,
+                    LastName: snapshot.val().LastName,
+                    Age: snapshot.val().Age,
+                    Gender: snapshot.val().Gender,
+                    PurposeofVisit: snapshot.val().Purpose
+                })
+                //remove(ref(db,"Patient/"+keyValue))
+                seeTodayAppointment();
+                seePriority();
+            })
+        }
+        function deleteAppoint(keyValue){
+                const dRef =ref(db);
+                var getD=query(child(dRef,"Patient/"+keyValue));
+                get(getD).then((snapshot)=>{
+                    var nameFull = snapshot.val().FirstName+" "+snapshot.val().LastName;
+                    var getT = ref(db,"Appointments/"+snapshot.val().Year+"/"+snapshot.val().Month+"/"+snapshot.val().Day+"/"+snapshot.val().TimeSlotted);
+                    update(getT,{
+                        Name:nameFull +" (No Show)"
+                    })
+                })
+                remove(ref(db,"Patient/"+keyValue))
+                seeTodayAppointment();
+        }
+        function endTheDay() {
+            var dt = new Date("11/10/2023");//For test use November 10
+            const dtyear = dt.getFullYear();
+			//var dtmonth = (dt.getMonth() + 1)
+            var dtmonth = dt.toLocaleString('default',{month:'long'});
+			const dtday = dt.getDate();
+
+            const dRef =ref(db);
+			let lineCount = 1;
+			for(var hourS=9;hourS<19;hourS++){
+				for(var minuteS=0;minuteS<2;minuteS++){
+					var minutE="00";
+					if (minuteS % 2 !=0){
+						minutE = "30";
+					}
+					let timeValue =hourS+":"+minutE;
+					var qery=query(child(dRef,"Appointments/"+dtyear+"/"+dtmonth+"/"+dtday+"/"+timeValue));
+					get(qery).then((snapshot)=>{
+                        var qery2=ref(db,"Appointments/"+dtyear+"/"+dtmonth+"/"+dtday+"/"+timeValue);
+						if(snapshot.val().Name == ""){
+                            update(qery2,{
+                                Name: "No Appointment"
+                            })
+						}
+					})
+				}
+			}
+        }
+        function setTables(){
+            seeTodayAppointment();
+            seePriority();
+        }
+        window.onload=function(){
+            setTables();
+        }
+
+        window.setSelectedTime=setSelectedTime;
+        window.displayAvailTime = displayAvailTime;
+        window.toDoctor = toDoctor;
+        window.deleteAppoint = deleteAppoint;
+        window.setChangeAptDetail= setChangeAptDetail;
+        window.changeTime=changeTime;
+        refButton.addEventListener("click",setTables);
+        endDay.addEventListener("click",endTheDay);
+
+        //testBtn.addEventListener('click',seeTodayAppointment)
+
+    </script>
+</body>
+</html>
