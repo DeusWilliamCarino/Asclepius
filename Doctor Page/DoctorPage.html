@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Doctor</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="banner">
+            <div class="navbar">
+                <!-- <img src="../images/logo.PNG" alt="logo" class="logo"> -->
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </div>
+            <div class="box">
+                <img src="logo.PNG" alt="Logo" class="logo">
+                <div style="text-align: center; background-origin: border-box; background-clip: padding-box, border-box; 
+                border-radius: 20px; padding: 10px; display: flex; flex-direction: column; align-items: center;">
+                    <div class="child">
+                        <h4 id="infoDump"></h4>
+                    </div>
+                    <div class="buttons">
+                        <button id="refresh"><span></span>Refresh</button>
+                        <button id="donePatient"><span></span>Done</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="Module">
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+		    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js";
+            import { PriorityQueue } from "https://FishWaterUnder.github.io/Algorithm/PriorityQueue.js";
+            
+            const firebaseConfig = {
+                apiKey: "AIzaSyBrsukv1qHoyt07PQk92tQJ0SGP1AFFwAM",
+		        authDomain: "asclepius-c75ef.firebaseapp.com",
+		        projectId: "asclepius-c75ef",
+		        storageBucket: "asclepius-c75ef.appspot.com",
+		        messagingSenderId: "23074186990",
+		        appId: "1:23074186990:web:8c3faf28372fd3d570b5ff",
+		        measurementId: "G-F4CJ76FBR8"
+            };
+            const app = initializeApp(firebaseConfig);
+            const analytics = getAnalytics(app);
+            import {getDatabase, set, get, update, remove, ref, child, query, orderByChild, limitToLast, onValue, orderByValue, push, equalTo} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
+            
+            const db = getDatabase();
+            var informPlace = document.getElementById("infoDump");
+            var refreshBtn = document.querySelector("#refresh");
+            var nxtPatient = document.querySelector("#donePatient");
+            var globalRefKey;
+
+            function setPatient(){
+                const dbRef =ref(db);
+                var textForHtml="<table style='margin-left: auto; margin-right: auto;'>";
+                get(child(dbRef,"InDocOffice/Doctor1"))
+                .then((snapshot)=>{
+                    if (snapshot.val().FirstName != ""){
+                        textForHtml +="<div style='border-top: 1px solid gray; margin: 10px; padding: 10px;'><tr><td>Name: </td><td>"+snapshot.val().FirstName+" "+snapshot.val().LastName+"</td></tr>"+
+                        "<tr><td>Age: </td><td>"+snapshot.val().Age+"</td></tr>"+
+                        "<tr><td>Gender: </td><td>"+snapshot.val().Gender+"</td></tr>"+
+                        "<tr><td>Purpose of Visit: </td><td>"+snapshot.val().PurposeofVisit+"</td></tr></table>";
+                        informPlace.innerHTML = textForHtml;
+                        globalRefKey = snapshot.val().ReferenceKey;
+                    }else{
+                        informPlace.innerHTML ="<h4>No Patient Loaded</h4>"
+                    }
+                })
+            }
+
+            function patientDone(){
+                const dbRef =ref(db);
+                get(child(dbRef,"Patient/"+globalRefKey))
+                .then((snapshot)=>{
+                    var year = snapshot.val().Year;
+                    var month= snapshot.val().Month;
+                    var dayN = snapshot.val().Day;
+                    var slotted = snapshot.val().TimeSlotted;
+                    var firstName = snapshot.val().FirstName;
+                    var lastName = snapshot.val().LastName;
+                    var qeery = ref(db,"Appointments/"+year+"/"+month+"/"+dayN+"/"+slotted)
+                    update(qeery,{
+                        Name : firstName+" "+lastName+" (Done)"
+                    })
+                })
+                remove(ref(db,"Patient/"+globalRefKey));
+                update(ref(db,"InDocOffice/Doctor1"),{
+                    Age :"",
+                    FirstName:"",
+                    LastName:"",
+                    Gender:"",
+                    PurposeofVisit:"",
+                    ReferenceKey:""
+                })
+                setPatient();
+            }
+            
+
+            window.onload =function(){
+                setPatient();
+            }
+            nxtPatient.addEventListener("click",patientDone);
+            refreshBtn.addEventListener("click",setPatient);
+        </script>
+    </body>
+</html>
