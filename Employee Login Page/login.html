@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="loginstyle.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    
+    <div class="wrapper">
+        <form action="">
+            <h1>Login</h1>
+            <div class="input-box">
+                <input type="text" placeholder="Username"
+                 required id="userName">
+                <i class='bx bxs-user'></i>
+            </div>
+            <div class="input-box">
+                <input type="text" id="passWord" placeholder="Password"
+                 required>
+                <i class='bx bxs-lock-alt' ></i>
+            </div>
+
+            <div class="remember-forgot">
+                <label> <input type="checkbox">Remember me
+                </label>
+                <a href="#">Forgot password?</a>
+            </div>
+
+            <button class="btn" id="enterSof">Login</button>
+        </form>
+    </div>
+    <script type="Module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js";
+        import { PriorityQueue } from "https://FishWaterUnder.github.io/Algorithm/PriorityQueue.js";
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyBrsukv1qHoyt07PQk92tQJ0SGP1AFFwAM",
+            authDomain: "asclepius-c75ef.firebaseapp.com",
+            projectId: "asclepius-c75ef",
+            storageBucket: "asclepius-c75ef.appspot.com",
+            messagingSenderId: "23074186990",
+            appId: "1:23074186990:web:8c3faf28372fd3d570b5ff",
+            measurementId: "G-F4CJ76FBR8"
+        };
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        import {getDatabase, set, get, update, remove, ref, child, query, orderByChild, limitToLast, onValue, orderByValue, push, equalTo} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
+        
+        const db = getDatabase();
+        const dbRef =ref(db);
+        var enterName = document.getElementById("userName");
+        var enterPass = document.getElementById("passWord");
+        var proceedBttn = document.querySelector("#enterSof");
+        var globKeyVal;
+        var globPerosnnelType;
+        var condition1;
+        var condition2;
+
+        function checkDoctor() {
+            return new Promise(function(resolve,reject){
+                const qeery=query(child(dbRef,"Personnel/Doctor"),orderByChild("Username"),equalTo(enterName.value));
+                get(qeery).then((snapshot)=>{
+                    if(snapshot.exists()){
+                        snapshot.forEach(childSnapshot=>{
+                            globKeyVal = childSnapshot.key;
+                            globPerosnnelType ="Doctor";
+                            return resolve();
+                        })
+                    }else{
+                        return reject();
+                    }
+                })
+            })
+        }
+        function checkNurse(){
+             return new Promise(function(resolve,reject){
+                const qeery=query(child(dbRef,"Personnel/Nurse"),orderByChild("Username"),equalTo(enterName.value));
+                get(qeery).then((snapshot)=>{
+                    if(snapshot.exists()){
+                        snapshot.forEach(childSnapshot=>{
+                            globKeyVal = childSnapshot.key;
+                            globPerosnnelType ="Nurse";
+                            return resolve();
+                        })
+                    }else{
+                        return reject();
+                    }
+                })
+            })
+        }
+
+        function checkUser(){
+            let typeUser = new Promise((resolve,reject)=>{
+                checkDoctor().then(function(){
+                condition1 = true;
+                },
+                function(){
+                    condition1 =false;
+                });
+                checkNurse().then(function(){
+                    condition2 = true;
+                },
+                function(){
+                    condition2= false;
+                });
+                setTimeout(() => {
+                    resolve();
+                }, 100);
+            });
+            
+            typeUser.then(function(){
+                console.log(condition1);
+                console.log(condition2);
+                console.log(globPerosnnelType);
+                console.log(globKeyVal);
+                if (condition1==true||condition2==true){
+                    const qery = query(child(dbRef,"Personnel/"+globPerosnnelType+"/"+globKeyVal))
+                    get(qery).then((snapshot)=>{
+                        if(snapshot.val().Password==enterPass.value){
+                            if(globPerosnnelType == "Nurse"){
+                                window.open("NursePage.html");
+                            }else{
+                                window.open("DoctorPage.html")
+                            }
+                        }else{
+                            alert("Wrong Password");
+                        }
+                    })
+                }else{
+                    alert("Wrong username");
+                }
+            })
+        }
+        proceedBttn.addEventListener("click",checkUser);
+    </script>
+</body>
+</html>
