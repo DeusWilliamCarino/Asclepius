@@ -1,0 +1,95 @@
+<html>
+    <head>
+        <meta charset = "utf-8">
+		<title>Confirm Page</title> 
+		<link rel="stylesheet" type="text/css" href="asclepiusStyle.css">
+    </head>
+    <body class="backgroundCheck">
+        <div style="text-align: center;">
+            <div class="centerTheBlock">
+                <div class ="input-group">
+                    <label class="input-group__label" for="myInput">Reference Key:</label>
+                    <input type="text" id="getRef" class="input-group__input">
+                    <button id="getInform"><span></span>Find Information</button>
+                </div>
+                <div style="text-align: center;">
+                    <p id="resPlaceholder"></p>
+                    <h4 id="dispNoRef" style="display: none;">Sorry there is no Information Related to that referecne Key</h4>
+                    <button id="deleteBttn" style="display: none;"><span></span> Cancel Appointment</button>
+                </div>
+            </div>
+        </div>
+        <script type="module">
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+		    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js";
+
+		    const firebaseConfig = {
+                apiKey: "AIzaSyBrsukv1qHoyt07PQk92tQJ0SGP1AFFwAM",
+                authDomain: "asclepius-c75ef.firebaseapp.com",
+                projectId: "asclepius-c75ef",
+                storageBucket: "asclepius-c75ef.appspot.com",
+                messagingSenderId: "23074186990",
+                appId: "1:23074186990:web:8c3faf28372fd3d570b5ff",
+                measurementId: "G-F4CJ76FBR8"
+            };
+
+            const app = initializeApp(firebaseConfig);
+            const analytics = getAnalytics(app);
+            import {getDatabase, set, get, update, remove, ref, child, query, orderByChild, limitToLast, onValue, orderByValue, push} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
+            const db = getDatabase();
+            
+            var enterRefKey = document.getElementById("getRef");
+            var buttonGet = document.querySelector("#getInform");
+            var buttonDel = document.querySelector("#deleteBttn");
+            var noRefInfo = document.getElementById("dispNoRef");
+            var infoPlace = document.getElementById("resPlaceholder");
+            
+            
+            function getDetails(){
+                const dRef =ref(db);
+                infoPlace.innerHTML = "Information: ";
+                var qery=query(child(dRef,"Patient/"+enterRefKey.value));
+                get(qery).then((snapshot)=>{
+                    if (snapshot.exists()){
+                        var inputInfo ="<br><table>"
+                        inputInfo += "<tr><td>First Name</td><td>"+snapshot.val().FirstName+"</td></tr>";
+                        inputInfo += "<tr><td>Last Name</td><td>"+snapshot.val().LastName+"</td></tr>";
+                        inputInfo += "<tr><td>Gender</td><td>"+snapshot.val().Gender+"</td></tr>";
+                        inputInfo += "<tr><td>Age</td><td>"+snapshot.val().Age+"</td></tr>";
+                        inputInfo += "<tr><td>Appoointment Date</td><td>"+snapshot.val().Month+" "+snapshot.val().Day+" "+snapshot.val().Year+"</td></tr>";
+                        inputInfo += "<tr><td>Time of Appointment</td><td>"+snapshot.val().TimeSlotted+"</td></tr>";
+                        inputInfo += "<tr><td>Purpsoe of Appointment</td><td>"+snapshot.val().Purpose+"</td></tr>";
+                        inputInfo +="</table>"
+                        infoPlace.innerHTML += inputInfo;
+                        infoPlace.style.display="block";
+                        buttonDel.style.display="block";
+                        noRefInfo.style.display="none";
+                    }else{
+                        infoPlace.style.display="none";
+                        buttonDel.style.display="none";
+                        noRefInfo.style.display="block";
+                    }
+                })
+            }
+            function deleteAppoint(){
+                const dRef =ref(db);
+                var getD=query(child(dRef,"Patient/"+enterRefKey.value));
+                get(getD).then((snapshot)=>{
+                    var getT = ref(db,"Appointments/"+snapshot.val().Year+"/"+snapshot.val().Month+"/"+snapshot.val().Day+"/"+snapshot.val().TimeSlotted);
+                    update(getT,{
+                        Name:""
+                    })
+                })
+
+                remove(ref(db,"Patient/"+enterRefKey.value))
+                .then(()=>{
+                    window.open("Asclepius.html");
+                    window.close();
+                });
+            }
+            
+            buttonDel.addEventListener("click",deleteAppoint);
+            buttonGet.addEventListener("click",getDetails);
+        </script>
+    </body>
+</html>
