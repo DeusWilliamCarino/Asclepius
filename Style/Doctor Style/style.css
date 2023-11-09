@@ -14,7 +14,7 @@ body{
     height: 100vh;
     background-size: cover;
     background-position: center;
-    background-image: linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)),url(try.jpg);
+    background-image: linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)),url(https://fishwaterunder.github.io/Style/Doctor Style/try.jpg);
 }
 .banner{
     text-align: center; 
