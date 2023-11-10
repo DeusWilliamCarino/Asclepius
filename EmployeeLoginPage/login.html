@@ -119,9 +119,11 @@
                     get(qery).then((snapshot)=>{
                         if(snapshot.val().Password==enterPass.value){
                             if(globPerosnnelType == "Nurse"){
-                                window.location.href="https://fishwaterunder.github.io/NursePage/NursePage.html";
+                                //window.location.href="https://fishwaterunder.github.io/NursePage/NursePage.html";
+                                console.log("Hi");
                             }else{
-                                window.location.href="https://fishwaterunder.github.io/DoctorPage/DoctorPage.html";
+                                //window.location.href="https://fishwaterunder.github.io/DoctorPage/DoctorPage.html";
+                                console.log("Hello");
                             }
                         }else{
                             alert("Wrong Password");
