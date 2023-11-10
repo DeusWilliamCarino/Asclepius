@@ -26,7 +26,7 @@
                 <a href="#">Forgot password?</a>
             </div>
 
-            <button class="btn" id="enterSof">Login</button>
+            <button type ="button" class="btn" id="enterSof">Login</button>
         </form>
     </div>
     <script type="Module">
@@ -119,11 +119,9 @@
                     get(qery).then((snapshot)=>{
                         if(snapshot.val().Password==enterPass.value){
                             if(globPerosnnelType == "Nurse"){
-                                //window.location.href="https://fishwaterunder.github.io/NursePage/NursePage.html";
-                                console.log("Hi");
+                                window.location.href="https://fishwaterunder.github.io/NursePage/NursePage.html";
                             }else{
-                                //window.location.href="https://fishwaterunder.github.io/DoctorPage/DoctorPage.html";
-                                console.log("Hello");
+                                window.location.href="https://fishwaterunder.github.io/DoctorPage/DoctorPage.html";
                             }
                         }else{
                             alert("Wrong Password");
